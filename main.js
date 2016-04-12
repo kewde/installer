@@ -1,6 +1,12 @@
 'use strict';
 
 const electron = require('electron');
+const os = require('os');
+
+
+var ipc = require('ipc');
+var dialog = require('dialog');
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -10,33 +16,53 @@ const BrowserWindow = electron.BrowserWindow;
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+global.configuration = {
+	os: os.platform(),
+	arch: os.arch(),
+	tails: 0,
+	path_exe: "",
+	path_block: "",
+	tor: false,
+	blockchain: false
+};
 
-  // and load the index.html of the app.
+
+function createWindow () {
+
+  mainWindow = new BrowserWindow({width: 800, height: 600});
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
-  // Emitted when the window is closed.
+	setDefaultPaths();
+
   mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
+// TODO: detect tails
+function detectTails(){
+	if(global.configuration.os == "linux"){
+		//showMessage(process.ENV['USER']);
+	} else {
+		return 0;	
+	}
+}
+
+function setDefaultPaths(){
+	global.configuration.path = "/home/ctrl/Desktop";
+}
+
+function showMessage(title, message){
+	dialog.showErrorBox(title, message);
+}
+
 app.on('ready', createWindow);
 
-// Quit when all windows are closed.
+
 app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit();
   }

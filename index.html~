@@ -8,14 +8,14 @@
   </head>
   <body>
     <h1>Shadow Installer</h1>
-<form onsubmit="setFolders();" id="folders" action="tor.html">
-	TODO: Disable these options by default, but give checkbox "install to usb or different directory
+<form onsubmit="setFolders();" id="folders" action="">
+	ONLY IF INSTALLING TO USB - LEAVE EMPTY OTHERWISE. Maybe disable at first.
 	Select destination to drop a folder 'Shadow' containing the executables:
-    <input type=file name="executable" nwworkingdir="/home/" webkitdirectory directory />
+    <input type=file name="executable" id="exe" nwworkingdir="/home/" webkitdirectory directory />
 <br />
 	
 	Select destination to drop a folder 'shadowcoin' containing the wallet files and blockchains:
-    <input type=file name="blockchain" webkitdirectory directory/>
+    <input type=file name="blockchain" id="block" webkitdirectory directory/>
 <br />
 	<input type="submit" value="Next">
 </form>
