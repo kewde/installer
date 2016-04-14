@@ -7,8 +7,8 @@ function showMessage2(title, message){
 }
 
 function setBlockchain(){
-	var blockchain = document.forms["blockchain"].elements["blockchain-checkbox"].value;
-	if(blockchain == "on"){
+	var blockchain = document.forms["blockchain"].elements["blockchain-checkbox"].checked;
+	if(blockchain == true){
 		remote.getGlobal("configuration").blockchain = true;
 	}
 }

@@ -6,8 +6,9 @@ function showMessage2(title, message){
 }
 
 function setTor(){
-	var tor = document.forms["tor"].elements["tor-checkbox"].value;
-	if(tor == "on"){
+	var tor = document.forms["tor"].elements["tor-checkbox"].checked;
+	if(tor == true){
+		console.log("tor on");
 		remote.getGlobal("configuration").tor = true;
-	}
+	} 
 }
