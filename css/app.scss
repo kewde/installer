@@ -44,6 +44,7 @@ html, body {
     background: transparent; border-color: transparent; border-width: 1px;
     &:hover { background: $red; border-color: darken($red, 20%); color: #fff; }
   }
+  &[disabled]{ cursor: not-allowed; }
 }
 
 
@@ -66,6 +67,8 @@ form {
   display: inline-block; padding: 0rem 0.4rem; margin-left: 0.5rem;
 }
 
+
+
 // ------ LAYOUT ------ //
 
 #header {
@@ -84,6 +87,10 @@ form {
 
 
 #content {
+  &.center {
+    text-align: center;
+    padding: 3rem 0;
+  }
 }
 
 
@@ -104,6 +111,16 @@ form {
 p.copy {}
 
 
+@keyframes loading {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+.loading {
+  display: inline-block; margin: 0;
+  font-size: 3rem; color: $red;
+  transform-origin: 50% 50%;
+  animation: loading 2s linear infinite reverse;
+}
 
 
 // ------ HELPER ------ //
