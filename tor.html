@@ -7,10 +7,35 @@
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <h1>Install Tor?</h1>
-	<form id="tor" onsubmit="setTor();" action="blockchain.html">
-		<input type="checkbox" name="tor-checkbox" checked=true/>
-		<input type="submit" value="Next"/>
-	</form>
+
+<div id="header"><!-- Note: H1 in header changes, the rest is the same across all pages -->
+  <h1>Install Tor</h1>
+  <div class="actions">
+    <a href="#" class="button close" title="Close and abort Installation">×</a>
+  </div>
+</div><!-- #header -->
+
+
+
+<form id="tor" onsubmit="setTor();" action="blockchain.html">
+
+  <div id="content">
+	  <p>You wanna install Tor?</p>
+    <label>
+      <input type="checkbox" name="tor-checkbox" checked=true/> Sure! <span class="tag">Recommended</span>
+      <span class="desc">This will download around X MB of data and install Tor etc.</span>
+    </label>
+  </div><!-- #content -->
+
+
+  <div id="footer" class="step">
+    <a href="index.html" class="secondary button left">Back</a>
+    <input type="submit" class="step button" value="Next">
+  </div><!-- #footer -->
+
+</form>
+
+
+
   </body>
 </html>

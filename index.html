@@ -7,17 +7,42 @@
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <h1>Shadow Installer</h1>
-<form onsubmit="setFolders();" id="folders" action="tor.html">
-	TODO: Disable these options by default, but give checkbox "install to usb or different directory
-	Select destination to drop a folder 'Shadow' containing the executables:
-    <input type=file name="executable" nwworkingdir="/home/" webkitdirectory directory />
-<br />
 
-	Select destination to drop a folder 'shadowcoin' containing the wallet files and blockchains:
+
+<div id="header"><!-- Note: H1 in header changes, the rest is the same across all pages -->
+  <h1>Choose directories</h1>
+  <div class="actions">
+    <a href="#" class="button close" title="Close and abort Installation">×</a>
+  </div>
+</div><!-- #header -->
+
+
+
+<form onsubmit="setFolders();" id="folders" action="tor.html">
+
+  <div id="content">
+	  <p>
+	    TODO: Disable these options by default, but give checkbox "install to usb or different directory
+	  </p>
+  	<p>
+  	  Select destination to drop a folder 'Shadow' containing the executables:
+  	</p>
+    <input type=file name="executable" nwworkingdir="/home/" webkitdirectory directory />
+
+  	<p>
+  	  Select destination to drop a folder 'shadowcoin' containing the wallet files and blockchains:
+  	</p>
     <input type=file name="blockchain" webkitdirectory directory/>
-<br />
-	<input type="submit" value="Next">
+  </div><!-- #content -->
+
+
+  <div id="footer" class="step">
+    <input type="submit" class="step button" value="Next">
+  </div><!-- #footer -->
+
 </form>
+
+
+
   </body>
 </html>

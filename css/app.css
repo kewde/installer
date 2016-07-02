@@ -351,11 +351,11 @@ iframe {
   -webkit-transform: scale(1.1);
   transform: scale(1.1); }
 
-.clearfix::before, [class*="block-grid"]::before, #header::before, .clearfix::after, [class*="block-grid"]::after, #header::after {
+.clearfix::before, [class*="block-grid"]::before, #header::before, #footer::before, .clearfix::after, [class*="block-grid"]::after, #header::after, #footer::after {
   content: "";
   display: table; }
 
-.clearfix::after, [class*="block-grid"]::after, #header::after {
+.clearfix::after, [class*="block-grid"]::after, #header::after, #footer::after {
   clear: both; }
 
 .show-grid {
@@ -455,11 +455,20 @@ html, body {
   border-bottom: 3px solid #8b1224;
   color: #fff;
   text-transform: uppercase;
-  border-radius: 0; }
+  line-height: 1.7;
+  border-radius: 0;
+  padding: 0.7rem 1.8rem;
+  margin: 0; }
   .button:hover {
     background: #cf1b35; }
   .button span {
     color: #8b1224; }
+  .button.step {
+    width: auto; }
+  .button.secondary {
+    background: #DCDEE0;
+    border-color: #c1c5c8;
+    color: #9595AA; }
   .button.close {
     height: 2.9rem;
     margin: -0.5rem -1.5rem -0.5rem 1rem;
@@ -474,6 +483,27 @@ html, body {
       background: #E2213D;
       border-color: #8b1224;
       color: #fff; }
+
+form label {
+  display: block;
+  margin-left: 2rem; }
+  form label input[type="checkbox"] {
+    margin-left: -1rem; }
+  form label .desc {
+    display: block;
+    font-size: 0.8rem;
+    color: #9595AA; }
+
+.tag {
+  color: #E2213D;
+  border: 1px solid #E2213D;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  line-height: 1.5;
+  display: inline-block;
+  padding: 0rem 0.4rem;
+  margin-left: 0.5rem; }
 
 #header {
   background: #fff;
@@ -506,8 +536,16 @@ html, body {
   background: linear-gradient(to bottom, #FBFBFC 0%, #fff 100%);
   border-top: 1px solid #DCDEE0;
   width: 100%;
-  padding: 1rem 0;
+  padding: 1rem 1.5rem;
   position: absolute;
   bottom: 0; }
   #footer.intro {
     text-align: center; }
+  #footer.step {
+    text-align: right; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }

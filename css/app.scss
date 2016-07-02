@@ -24,12 +24,20 @@ html, body {
 
 .button {
   background: $red; border-bottom: 3px solid darken($red, 20%);
-  color: #fff; text-transform: uppercase;
+  color: #fff; text-transform: uppercase; line-height: 1.7;
   border-radius: 0;
+  padding: 0.7rem 1.8rem; margin: 0;
   &:hover {
     background: darken($red, 5%);
   }
   span { color: darken($red, 20%); }
+  &.step {
+    width: auto;
+  }
+  &.secondary {
+    background: $grey; border-color: darken($grey, 10%);
+    color: $darkgrey;
+  }
   &.close {
     height: 2.9rem; margin: -0.5rem -1.5rem -0.5rem 1rem; padding: 0 1.1rem;
     color: $darkgrey; font-size: 1.5rem; line-height: 2.8rem;
@@ -39,6 +47,24 @@ html, body {
 }
 
 
+form {
+  label {
+    display: block; margin-left: 2rem;
+    input {
+      &[type="checkbox"] { margin-left: -1rem; }
+    }
+    .desc {
+      display: block;
+      font-size: 0.8rem; color: $darkgrey;
+    }
+  }
+}
+
+.tag {
+  color: $red; border: 1px solid $red; border-radius: 3px;
+  font-size: 0.65rem; text-transform: uppercase; line-height: 1.5;
+  display: inline-block; padding: 0rem 0.4rem; margin-left: 0.5rem;
+}
 
 // ------ LAYOUT ------ //
 
@@ -62,11 +88,13 @@ html, body {
 
 
 #footer {
+  @extend .clearfix;
   @include gradient($lightgrey, #fff);
   border-top: 1px solid $grey;
-  width: 100%; padding: 1rem 0;
+  width: 100%; padding: 1rem 1.5rem;
   position: absolute; bottom: 0;
   &.intro { text-align: center; }
+  &.step { text-align: right; }
 }
 
 
@@ -74,3 +102,11 @@ html, body {
 // ------ SPECIFIC ------ //
 
 p.copy {}
+
+
+
+
+// ------ HELPER ------ //
+
+.left { float: left; }
+.right { float: right; }
