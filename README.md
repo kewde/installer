@@ -1,3 +1,16 @@
+# Shadow Installer
+
+Note: use ```preview-frame.html``` for App preview/devel (simulates standalone window for devel purposes).
+
+## Pages
+
+1. intro
+2. index
+3. tor
+4. blockchain
+5. setup
+
+
 # electron-quick-start
 
 **Clone and run for a quick way to see an Electron in action.**
