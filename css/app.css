@@ -500,6 +500,12 @@ h1, h2, h3 {
   font-weight: 700;
   text-transform: uppercase; }
 
+pre, code {
+  white-space: initial;
+  background: none;
+  color: #9595AA;
+  font-size: 0.7rem; }
+
 .button {
   background: #E2213D;
   border-bottom: 3px solid #8b1224;
@@ -544,15 +550,19 @@ h1, h2, h3 {
   .button[disabled] {
     cursor: not-allowed; }
 
-form label {
-  display: block;
-  margin-left: 2rem; }
-  form label input[type="checkbox"] {
-    margin-left: -1rem; }
-  form label .desc {
+form {
+  height: calc(100% - 2.9rem); }
+  form label {
     display: block;
-    font-size: 0.8rem;
-    color: #9595AA; }
+    margin-left: 2rem; }
+    form label input[type="checkbox"] {
+      margin-left: -1rem; }
+    form label .desc {
+      display: block;
+      font-size: 0.8rem;
+      color: #9595AA; }
+  form > #content {
+    height: calc(100% - 5.4rem); }
 
 .tag {
   color: #E2213D;
@@ -625,6 +635,32 @@ form label {
   #content.center {
     text-align: center;
     padding: 3rem 0; }
+  #content #sidebar {
+    width: 41%;
+    padding: 0.5rem 3rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-right: 1px solid #DCDEE0; }
+    #content #sidebar .logo {
+      font-size: 1.3rem; }
+      #content #sidebar .logo img {
+        width: 1.6rem;
+        margin-right: 0.9rem;
+        position: relative;
+        top: 0.45rem; }
+      #content #sidebar .logo span {
+        color: #E2213D; }
+  #content #choices {
+    width: 59%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0; }
+    #content #choices h2 {
+      font-size: 1rem;
+      margin: 0 0 1.5rem; }
 
 #footer {
   background: #FBFBFC;

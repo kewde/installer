@@ -20,11 +20,26 @@
 <form id="tor" onsubmit="setTor();" action="blockchain.html">
 
   <div id="content">
-	  <p>You wanna install Tor?</p>
-    <label>
-      <input type="checkbox" name="tor-checkbox" checked=true/> Sure! <span class="tag">Recommended</span>
-      <span class="desc">This will download around X MB of data and install Tor etc.</span>
-    </label>
+
+    <div id="sidebar">
+      <h3 class="logo"><img src="img/shadow-logo.svg">Shadow<span>Project</span></h3>
+      <pre class="console">
+        <code>
+          Downloading latest wallet from GitHub...<br>
+          ✓ Successfully downloaded<br>
+          Installing Tor...
+        </code>
+      </pre>
+    </div><!-- #sidebar -->
+
+	  <div id="choices">
+      <h2>Install Tor?</h2>
+      <label>
+        <input type="checkbox" name="tor-checkbox" checked=true/> Sure! <span class="tag">Recommended</span>
+        <span class="desc">This will download around X MB of data and install Tor etc.</span>
+      </label>
+	  </div><!-- #choices -->
+
   </div><!-- #content -->
 
 
