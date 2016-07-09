@@ -1,7 +1,10 @@
 @import 'brickst';
+@import 'fonts';
+@import 'installer-icons.css';
 
 // ------ CONFIG ------ //
 
+// COLORS
 $red: #E2213D; // main color
 $black: #1C1C21;
 $grey: #DCDEE0; // lines etc.
@@ -13,9 +16,16 @@ $darkgrey: #9595AA; // descriptions, UI close etc.
 // ------ BASICS ------ //
 
 html, body {
+  font-family: "Open Sans", sans-serif;
   background: #fff;
   width: 100%; height: 100%;
   position: relative;
+  -webkit-user-select: none; -moz-user-select: none; user-select: none; // we don't want text to be select-able
+}
+
+h1, h2, h3 {
+  font-family: "Lato", sans-serif; font-weight: 700;
+  text-transform: uppercase;
 }
 
 
@@ -24,11 +34,17 @@ html, body {
 
 .button {
   background: $red; border-bottom: 3px solid darken($red, 20%);
+  font-family: "Lato", sans-serif; font-weight: 700;
   color: #fff; text-transform: uppercase; line-height: 1.7;
   border-radius: 0;
   padding: 0.7rem 1.8rem; margin: 0;
   &:hover {
     background: darken($red, 5%);
+  }
+  .icon {
+    font-size: 1rem; color: darken($red, 20%);
+    position: relative; top: 0.05rem;
+    margin-left: 0.5rem;
   }
   span { color: darken($red, 20%); }
   &.step {
@@ -87,6 +103,37 @@ form {
 
 
 #content {
+  height: calc(100% - 8.3rem);
+  position: relative;
+  // intro screen
+  &.intro {
+    .logo {
+      font-size: 2.1rem;
+      margin: 1rem 0 2.5rem; padding-bottom: 2.5rem;
+      position: relative;
+      &::after {
+        content: ""; position: absolute; bottom: 0;
+        left: 50%; transform: translate(-50%);
+        border-bottom: 1px solid $grey;
+        display: inline-block; width: 7rem;
+      }
+      span { color: $red; }
+      img {
+        width: 3rem; margin-right: 1.7rem;
+        position: relative; top: 1rem;
+        pointer-events: none;
+      }
+    }
+    p {
+      width: 30rem; margin: 0 auto;
+      font-size: 0.95rem;
+      &.copy {
+        position: absolute; bottom: 1rem;
+        width: 100%;
+        font-size: 0.7rem; text-transform: uppercase; color: $darkgrey;
+      }
+    }
+  }
   &.center {
     text-align: center;
     padding: 3rem 0;
@@ -98,7 +145,7 @@ form {
   @extend .clearfix;
   @include gradient($lightgrey, #fff);
   border-top: 1px solid $grey;
-  width: 100%; padding: 1rem 1.5rem;
+  width: 100%; height: 5.4rem; padding: 1rem 1.5rem;
   position: absolute; bottom: 0;
   &.intro { text-align: center; }
   &.step { text-align: right; }
@@ -108,9 +155,7 @@ form {
 
 // ------ SPECIFIC ------ //
 
-p.copy {}
-
-
+// ANIMATIONS
 @keyframes loading {
   from { transform: rotate(0deg); }
   to { transform: rotate(359deg); }
