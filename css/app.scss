@@ -185,12 +185,14 @@ form {
   #choices {
     width: 59%;
     position: absolute; top: 0; bottom: 0; right: 0;
+    line-height: 1.5;
     .content {
       position: absolute; top: 50%; transform: translateY(-50%); // vertical align
       width: 100%; padding: 1.5rem 3rem;
       .subchoice {
-        padding: 1rem 3rem; margin: 1rem -3rem;
+        padding: 0.5rem 3rem; margin: 1rem -3rem;
         border-top: 1px dashed $grey;
+        font-size: 0.85rem;
         p { margin: 1rem 0 0.5rem; }
       }
     }
