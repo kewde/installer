@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Select destination folders</title>
-    <script src="selectFolders.js"></script>
+    <script src="js/selectFolders.js"></script>
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
@@ -21,18 +21,41 @@
 <form onsubmit="setFolders();" id="folders" action="tor.html">
 
   <div id="content">
-	  <p>
-	    TODO: Disable these options by default, but give checkbox "install to usb or different directory
-	  </p>
-  	<p>
-  	  Select destination to drop a folder 'Shadow' containing the executables:
-  	</p>
-    <input type=file name="executable" nwworkingdir="/home/" webkitdirectory directory />
 
-  	<p>
-  	  Select destination to drop a folder 'shadowcoin' containing the wallet files and blockchains:
-  	</p>
-    <input type=file name="blockchain" webkitdirectory directory/>
+    <div id="sidebar">
+      <h3 class="logo"><img src="img/shadow-logo.svg">Shadow<span>Project</span></h3>
+      <pre class="console">
+        <code>
+          Downloading latest wallet from GitHub...<br>
+          ✓ Successfully downloaded
+        </code>
+      </pre>
+    </div><!-- #sidebar -->
+
+    <div id="choices">
+      <div class="content">
+        <h2>Overwrite installation directory?</h2>
+        <label class="toggle"><!-- when it has more "subchoices", add .toggle class -->
+          <input type="checkbox" name="blockchain-checkbox" />
+          <span class="label">
+            Yes, install to different directory (e.g. USB)
+            <span class="desc">This will overwrite default installation directory. If you're not sure, leave the default values and continue.</span>
+          </span>
+        </label>
+
+        <div class="subchoice">
+          <p>
+        	  <b>Shadow</b> folder destination (executables):
+        	</p>
+          <input type=file name="executable" nwworkingdir="/home/" webkitdirectory directory />
+          <p>
+            <b>shadowcoin</b> folder destination (wallet, blockchain):
+        	</p>
+          <input type=file name="blockchain" webkitdirectory directory/>
+        </div><!-- .subchoice -->
+      </div>
+	  </div><!-- #choices -->
+
   </div><!-- #content -->
 
 

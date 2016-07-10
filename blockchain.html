@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Shadow Installer</title>
-    <script src="installBlockchain.js"></script>
+    <script src="js/installBlockchain.js"></script>
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
@@ -20,11 +20,33 @@
 <form id="blockchain" onsubmit="setBlockchain();" action="setup.html">
 
   <div id="content">
-	  <p>You wanna pre-load blockchain?</p>
-    <label>
-      <input type="checkbox" name="blockchain-checkbox" checked=true/> Sure!
-      <span class="desc">This will download blockchain and sync you with the network in minutes (in contrast to hours-days via normal sync)</span>
-    </label>
+
+    <div id="sidebar">
+      <h3 class="logo"><img src="img/shadow-logo.svg">Shadow<span>Project</span></h3>
+      <pre class="console">
+        <code>
+          Downloading latest wallet from GitHub...<br>
+          ✓ Successfully downloaded<br>
+          Installing Tor...<br>
+          ✓ Successfully installed<br>
+          Downloading blockchain...
+        </code>
+      </pre>
+    </div><!-- #sidebar -->
+
+    <div id="choices">
+      <div class="content">
+        <h2>Pre-load blockchain?</h2>
+        <label>
+          <input type="checkbox" name="blockchain-checkbox" />
+          <span class="label">
+            Yes, pre-load blockchain
+            <span class="desc">This will download blockchain and sync you with the network in minutes (in contrast to hours-days via normal sync)</span>
+          </span>
+        </label>
+      </div>
+	  </div><!-- #choices -->
+
   </div><!-- #content -->
 
 
