@@ -11,6 +11,7 @@ $grey: #DCDEE0; // lines etc.
 $lightgrey: #FBFBFC; // light backgrounds (for gradients)
 $darkgrey: #9595AA; // descriptions, UI close etc.
 
+$radius: 4px;
 
 
 // ------ BASICS ------ //
@@ -71,9 +72,23 @@ pre, code {
 form {
   height: calc(100% - 2.9rem); // stretch forms on full height (minus header)
   label {
-    display: block; margin-left: 2rem;
+    display: block; padding: 0.6rem 1.3rem;
+    &:hover { background: $lightgrey; border-radius: $radius; }
     input {
-      &[type="checkbox"] { margin-left: -1rem; }
+      &[type="checkbox"] {
+        display: none;
+        & + .label::before {
+          content: "\e903"; font-family: "sdc-installer"; color: $darkgrey;
+          position: absolute; left: 0;
+        }
+        &:checked + .label::before {
+          content: "\e904"; color: $red;
+        }
+      }
+    }
+    .label {
+      display: block; padding-left: 1.7rem;
+      position: relative;
     }
     .desc {
       display: block;
@@ -84,9 +99,10 @@ form {
 }
 
 .tag {
-  color: $red; border: 1px solid $red; border-radius: 3px;
-  font-size: 0.65rem; text-transform: uppercase; line-height: 1.5;
+  color: $red; font-size: 0.65rem; text-transform: uppercase; line-height: 1.5;
+  background: #fff; border: 1px solid $red; border-radius: 3px;
   display: inline-block; padding: 0rem 0.4rem; margin-left: 0.5rem;
+  position: relative; top: -2px;
 }
 
 
@@ -162,9 +178,13 @@ form {
   #choices {
     width: 59%;
     position: absolute; top: 0; bottom: 0; right: 0;
+    .content {
+      position: absolute; top: 50%; transform: translateY(-50%); // vertical align
+      width: 100%; padding: 1.5rem 3rem;
+    }
     h2 {
       font-size: 1rem;
-      margin: 0 0 1.5rem;
+      margin: 0 0 1rem;
     }
   }
 }

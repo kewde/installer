@@ -554,9 +554,25 @@ form {
   height: calc(100% - 2.9rem); }
   form label {
     display: block;
-    margin-left: 2rem; }
+    padding: 0.6rem 1.3rem; }
+    form label:hover {
+      background: #FBFBFC;
+      border-radius: 4px; }
     form label input[type="checkbox"] {
-      margin-left: -1rem; }
+      display: none; }
+      form label input[type="checkbox"] + .label::before {
+        content: "\e903";
+        font-family: "sdc-installer";
+        color: #9595AA;
+        position: absolute;
+        left: 0; }
+      form label input[type="checkbox"]:checked + .label::before {
+        content: "\e904";
+        color: #E2213D; }
+    form label .label {
+      display: block;
+      padding-left: 1.7rem;
+      position: relative; }
     form label .desc {
       display: block;
       font-size: 0.8rem;
@@ -566,14 +582,17 @@ form {
 
 .tag {
   color: #E2213D;
-  border: 1px solid #E2213D;
-  border-radius: 3px;
   font-size: 0.65rem;
   text-transform: uppercase;
   line-height: 1.5;
+  background: #fff;
+  border: 1px solid #E2213D;
+  border-radius: 3px;
   display: inline-block;
   padding: 0rem 0.4rem;
-  margin-left: 0.5rem; }
+  margin-left: 0.5rem;
+  position: relative;
+  top: -2px; }
 
 #header {
   background: #fff;
@@ -658,9 +677,15 @@ form {
     top: 0;
     bottom: 0;
     right: 0; }
+    #content #choices .content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      padding: 1.5rem 3rem; }
     #content #choices h2 {
       font-size: 1rem;
-      margin: 0 0 1.5rem; }
+      margin: 0 0 1rem; }
 
 #footer {
   background: #FBFBFC;
