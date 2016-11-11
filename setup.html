@@ -3,12 +3,40 @@
   <head>
     <meta charset="UTF-8">
     <title>Setup</title>
-    <script src="setup.js"></script>
+    <script src="js/setup.js"></script>
+    <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <h1>Setting everything up, please wait..</h1>
-	<form >
-		<input type="submit" value="Next" disabled/>
-	</form>
+
+
+<div id="header">
+  <h1>Working...</h1>
+  <!-- We should probably disable close/abort button during setup, or not? -->
+  <!--div class="actions">
+    <a href="#" class="button close" title="Close and abort Installation">×</a>
+  </div-->
+</div><!-- #header -->
+
+
+<form>
+
+  <div id="content" class="center">
+    <h2 class="loading">&olarr;</h2>
+    <p>
+      Setting everything up, please wait.. Installer will be done in a few minutes.
+    </p>
+    <p class="copy">
+      Grab a coffee and enjoy the ride.
+    </p>
+  </div><!-- #content -->
+
+
+  <div id="footer" class="intro">
+    <input type="submit" class="step button" value="Next" disabled/>
+  </div><!-- #footer -->
+
+</form>
+
+
   </body>
 </html>

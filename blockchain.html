@@ -3,13 +3,61 @@
   <head>
     <meta charset="UTF-8">
     <title>Shadow Installer</title>
-    <script src="installBlockchain.js"></script>
+    <script src="js/installBlockchain.js"></script>
+    <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <h1>Install blockchain?</h1>
-	<form id="blockchain" onsubmit="setBlockchain();" action="setup.html">
-		<input type="checkbox" name="blockchain-checkbox" checked=true/>
-		<input type="submit" value="Next"/>
-	</form>
+
+
+<div id="header"><!-- Note: H1 in header changes, the rest is the same across all pages -->
+  <h1>Load Blockchain</h1>
+  <div class="actions">
+    <a href="#" class="button close" title="Close and abort Installation">×</a>
+  </div>
+</div><!-- #header -->
+
+
+<form id="blockchain" onsubmit="setBlockchain();" action="setup.html">
+
+  <div id="content">
+
+    <div id="sidebar">
+      <h3 class="logo"><img src="img/shadow-logo.svg">Shadow<span>Project</span></h3>
+      <pre class="console">
+        <code>
+          Downloading latest wallet from GitHub...<br>
+          ✓ Successfully downloaded<br>
+          Installing Tor...<br>
+          ✓ Successfully installed<br>
+          Downloading blockchain...
+        </code>
+      </pre>
+    </div><!-- #sidebar -->
+
+    <div id="choices">
+      <div class="content">
+        <h2>Pre-load blockchain?</h2>
+        <label>
+          <input type="checkbox" name="blockchain-checkbox" />
+          <span class="label">
+            Yes, pre-load blockchain
+            <span class="desc">This will download blockchain and sync you with the network in minutes (in contrast to hours-days via normal sync)</span>
+          </span>
+        </label>
+      </div>
+	  </div><!-- #choices -->
+
+  </div><!-- #content -->
+
+
+  <div id="footer" class="step">
+    <a href="tor.html" class="secondary button left">Back</a>
+    <input type="submit" class="step button" value="Next">
+  </div><!-- #footer -->
+
+</form>
+
+
+
   </body>
 </html>

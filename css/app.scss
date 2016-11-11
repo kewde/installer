@@ -1,0 +1,237 @@
+@import 'brickst';
+@import 'fonts';
+@import 'installer-icons.css';
+
+// ------ CONFIG ------ //
+
+// COLORS
+$red: #E2213D; // main color
+$black: #1C1C21;
+$grey: #DCDEE0; // lines etc.
+$lightgrey: #FBFBFC; // light backgrounds (for gradients)
+$darkgrey: #9595AA; // descriptions, UI close etc.
+
+$radius: 4px;
+
+
+// ------ BASICS ------ //
+
+html, body {
+  font-family: "Open Sans", sans-serif;
+  background: #fff;
+  width: 100%; height: 100%;
+  position: relative;
+  -webkit-user-select: none; -moz-user-select: none; user-select: none; // we don't want text to be select-able
+}
+
+h1, h2, h3 {
+  font-family: "Lato", sans-serif; font-weight: 700;
+  text-transform: uppercase;
+}
+
+pre, code {
+  white-space: initial;
+  background: none;
+  color: $darkgrey; font-size: 0.7rem;
+}
+
+// ------ UI ELEMENTS ------ //
+
+.button {
+  background: $red; border-bottom: 3px solid darken($red, 20%);
+  font-family: "Lato", sans-serif; font-weight: 700;
+  color: #fff; text-transform: uppercase; line-height: 1.7;
+  border-radius: 0;
+  padding: 0.7rem 1.8rem; margin: 0;
+  &:hover {
+    background: darken($red, 5%);
+  }
+  .icon {
+    font-size: 1rem; color: darken($red, 20%);
+    position: relative; top: 0.05rem;
+    margin-left: 0.5rem;
+  }
+  span { color: darken($red, 20%); }
+  &.step {
+    width: auto;
+  }
+  &.secondary {
+    background: $grey; border-color: darken($grey, 10%);
+    color: $darkgrey;
+  }
+  &.close {
+    height: 2.9rem; margin: -0.5rem -1.5rem -0.5rem 1rem; padding: 0 1.1rem;
+    color: $darkgrey; font-size: 1.5rem; line-height: 2.8rem;
+    background: transparent; border-color: transparent; border-width: 1px;
+    &:hover { background: $red; border-color: darken($red, 20%); color: #fff; }
+  }
+  &[disabled]{ cursor: not-allowed; }
+}
+
+
+form {
+  height: calc(100% - 2.9rem); // stretch forms on full height (minus header)
+  label {
+    display: block; padding: 0.6rem 1.3rem;
+    &:hover { background: $lightgrey; border-radius: $radius; }
+    input {
+      // checkboxes
+      &[type="checkbox"] {
+        display: none;
+        & + .label::before {
+          content: "\e903"; font-family: "sdc-installer"; color: $darkgrey;
+          position: absolute; left: 0;
+        }
+        &:checked + .label::before {
+          content: "\e904"; color: $red;
+        }
+      }
+    }
+    .label {
+      display: block; padding-left: 1.7rem;
+      position: relative;
+    }
+    .desc {
+      display: block; margin-top: 0.2rem;
+      font-size: 0.8rem; color: $darkgrey; line-height: 1.4;
+    }
+  }
+  // file upload
+  input[type="file"] {
+    background: $lightgrey; border-radius: $radius;
+    padding: 5px; margin: 0;
+    font-size: 0.8rem;
+  }
+  & > #content { height: calc(100% - 5.4rem); }
+}
+
+.tag {
+  color: $red; font-size: 0.65rem; text-transform: uppercase; line-height: 1.5;
+  background: #fff; border: 1px solid $red; border-radius: 3px;
+  display: inline-block; padding: 0rem 0.4rem; margin-left: 0.5rem;
+  position: relative; top: -2px;
+}
+
+
+
+// ------ LAYOUT ------ //
+
+#header {
+  @include gradient(#fff, $lightgrey);
+  @extend .clearfix;
+  border-bottom: 1px solid $grey;
+  height: 2.9rem; padding: 0.5rem 1.5rem;
+  h1 {
+    display: inline-block; margin: 0;
+    font-size: 1rem; color: $darkgrey; font-weight: normal; text-transform: uppercase;
+  }
+  .actions {
+    float: right;
+  }
+}
+
+
+#content {
+  height: calc(100% - 8.3rem);
+  position: relative;
+  // intro screen
+  &.intro {
+    .logo {
+      font-size: 2.1rem;
+      margin: 1rem 0 2.5rem; padding-bottom: 2.5rem;
+      position: relative;
+      &::after {
+        content: ""; position: absolute; bottom: 0;
+        left: 50%; transform: translate(-50%);
+        border-bottom: 1px solid $grey;
+        display: inline-block; width: 7rem;
+      }
+      span { color: $red; }
+      img {
+        width: 3rem; margin-right: 1.7rem;
+        position: relative; top: 1rem;
+        pointer-events: none;
+      }
+    }
+    p {
+      width: 30rem; margin: 0 auto;
+      font-size: 0.95rem;
+      &.copy {
+        position: absolute; bottom: 1rem;
+        width: 100%;
+        font-size: 0.7rem; text-transform: uppercase; color: $darkgrey;
+      }
+    }
+  }
+  &.center {
+    text-align: center;
+    padding: 3rem 0;
+  }
+  // sidebar
+  #sidebar {
+    width: 41%; padding: 0.5rem 3rem;
+    position: absolute; top: 0; bottom: 0; left: 0;
+    border-right: 1px solid $grey;
+    .logo {
+      font-size: 1.3rem;
+      img {
+        width: 1.6rem; margin-right: 0.9rem;
+        position: relative; top: 0.45rem;
+    }
+      span { color: $red; }
+    }
+  }
+  // content/choices
+  #choices {
+    width: 59%;
+    position: absolute; top: 0; bottom: 0; right: 0;
+    line-height: 1.5;
+    .content {
+      position: absolute; top: 50%; transform: translateY(-50%); // vertical align
+      width: 100%; padding: 1.5rem 3rem;
+      .subchoice {
+        padding: 0.5rem 3rem; margin: 1rem -3rem;
+        border-top: 1px dashed $grey;
+        font-size: 0.85rem;
+        p { margin: 1rem 0 0.5rem; }
+      }
+    }
+    h2 {
+      font-size: 1rem;
+      margin: 0 0 1rem;
+    }
+  }
+}
+
+
+#footer {
+  @extend .clearfix;
+  @include gradient($lightgrey, #fff);
+  border-top: 1px solid $grey;
+  width: 100%; height: 5.4rem; padding: 1rem 1.5rem;
+  position: absolute; bottom: 0;
+  &.intro { text-align: center; }
+  &.step { text-align: right; }
+}
+
+
+
+// ------ SPECIFIC ------ //
+
+// ANIMATIONS
+@keyframes loading {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+.loading {
+  display: inline-block; margin: 0;
+  font-size: 3rem; color: $red;
+  transform-origin: 50% 50%;
+  animation: loading 2s linear infinite reverse;
+}
+
+
+// ------ HELPER ------ //
+
+.left { float: left; }
+.right { float: right; }
