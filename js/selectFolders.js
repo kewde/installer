@@ -9,7 +9,13 @@ var dialog = remote.require('dialog');
 
 
 function showMessage2(title, message){
-	dialog.showErrorBox(title, message);
+	dialog.showMessageBox({ message: "The file has been saved! :-)",
+		type: "info",
+		title: title,
+		message: "Umbra installer has the following installation paths:",
+		detail: message,
+		buttons: ["Next: Tor Opt-in"]
+	});
 }
 
 function setFolders(){
@@ -42,6 +48,7 @@ function setFolders(){
 		}
 		remote.getGlobal("configuration").path_block = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + 'Library/Application Support' : "/home/" + userName);
 	}
-		showMessage2("Default exe", remote.getGlobal("configuration").path_exe);
-		showMessage2("Default block", remote.getGlobal("configuration").path_block);
+
+	showMessage2("Installation Paths Set", "Executable Path (Client): " + remote.getGlobal("configuration").path_exe
+		+ "\nData Path (Blockchain): " + remote.getGlobal("configuration").path_block);
 }
