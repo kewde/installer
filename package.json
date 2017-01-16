@@ -1,27 +1,34 @@
 {
-  "name": "electron-quick-start",
+  "name": "umbra-installer",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Installs the Umbra client from Shadowproject",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron ./main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron/electron-quick-start.git"
+    "url": "git+https://github.com/kewde/installer.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Shadowcash",
+    "Umbra",
+    "SDC",
+    "Shadowproject"
   ],
-  "author": "GitHub",
+  "author": [
+    "Kewde",
+    "Matthewjamesr"
+  ],
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
+    "url": "https://riot.im/app/#/room/#shadowproject:matrix.org"
   },
-  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "homepage": "https://shadowproject.io/",
+  "dependencies": {
+    "socks5-https-client": "1.2.0",
+    "unzip": "0.1.11"
+  },
   "devDependencies": {
     "electron-prebuilt": "^0.37.0"
   }

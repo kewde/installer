@@ -29,8 +29,9 @@ global.configuration = {
 
 function createWindow () {
 
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow = new BrowserWindow({width: 800, height: 600, frame: false});
+  mainWindow.loadURL('file://' + __dirname + '/intro.html');
+	mainWindow.setMenu(null);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -47,12 +48,20 @@ function detectTails(){
 	if(global.configuration.os == "linux"){
 		//showMessage(process.ENV['USER']);
 	} else {
-		return 0;	
+		return 0;
 	}
 }
 
 function setDefaultPaths(){
-	global.configuration.path = "/home/ctrl/Desktop";
+	if(global.configuration.os == "linux") {
+		global.configuration.path = "/home";
+	}
+	if(global.configuration.os == "win32") {
+		global.configuration.path = "C:\ProgramData";
+	}
+	if(global.configuration.os == "osx") {
+		global.configuration.path = "~/Desktop";
+	}
 }
 
 function showMessage(title, message){

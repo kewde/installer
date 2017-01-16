@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Select destination folders</title>
+    <title>Get Started | Umbra by Shadowproject</title>
     <script src="js/selectFolders.js"></script>
     <link rel="stylesheet" href="css/app.css">
   </head>
@@ -10,9 +10,9 @@
 
 
 <div id="header"><!-- Note: H1 in header changes, the rest is the same across all pages -->
-  <h1>Choose directories</h1>
+  <h1 style="-webkit-app-region: drag">Step 1: Choose directories</h1>
   <div class="actions">
-    <a href="#" class="button close" title="Close and abort Installation">×</a>
+    <a href="#" class="button close" id="btn-close" title="Close and abort Installation">×</a>
   </div>
 </div><!-- #header -->
 
@@ -26,8 +26,7 @@
       <h3 class="logo"><img src="img/shadow-logo.svg">Shadow<span>Project</span></h3>
       <pre class="console">
         <code>
-          Downloading latest wallet from GitHub...<br>
-          ✓ Successfully downloaded
+          The latest Umbra wallet will be downloaded from Github.
         </code>
       </pre>
     </div><!-- #sidebar -->
@@ -68,4 +67,11 @@
 
 
   </body>
+
+  <script type="text/javascript">
+    document.getElementById("btn-close").addEventListener("click", function (e) {
+         var window = remote.getCurrentWindow();
+         window.close();
+    });
+  </script>
 </html>

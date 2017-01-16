@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Welcome the Shadow Client Installation</title>
+    <title>Let's Setup | Umbra by Shadowproject</title>
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
@@ -10,9 +10,9 @@
 
 
 <div id="header"><!-- Note: H1 in header changes, the rest is the same across all pages -->
-  <h1>Welcome</h1>
+  <h1 style="-webkit-app-region: drag">Welcome</h1>
   <div class="actions">
-    <a href="#" class="button close" title="Close and abort Installation">×</a>
+    <a href="#" class="button close" id="btn-close" title="Close and abort Installation">×</a>
   </div>
 </div><!-- #header -->
 
@@ -36,4 +36,12 @@
 
 
   </body>
+
+  <script type="text/javascript">
+    const remote = require('electron').remote;
+    document.getElementById("btn-close").addEventListener("click", function (e) {
+         var window = remote.getCurrentWindow();
+         window.close();
+    });
+  </script>
 </html>

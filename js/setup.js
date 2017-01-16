@@ -95,18 +95,20 @@ nodewin.elevate('"' + pathtest + '/Shadow/tor/Tor/tor.exe" --service install -op
 if(config.os == "linux" && config.arch == "x32"){
 
 } else if(config.os == "linux" && config.arch == "x64"){
-	//downloadFileHTTPS("https://github.com/shadowproject/shadow/releases/download/v1.4.0.3/shadow_1.4.0.3_linux64.zip", "shadow.zip", config.tor, config.path_exe);
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_linux64.zip", "shadow.zip", config.tor, config.path_exe);
 } else if(config.os == "win32" && config.arch == "x32"){
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_win32.zip", "shadow.zip", config.tor, config.path_exe);
 } else if(config.os == "win32" && config.arch == "x64"){
-//	downloadFileHTTPS("https://github.com/shadowproject/shadow/releases/download/v1.4.0.3/shadow_1.4.0.3_win64.zip", "shadow.zip", config.tor, config.path_exe);
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_win64.zip", "shadow.zip", config.tor, config.path_exe);
 } else if(config.os == "osx"){
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_macosx.dmg.zip", "shadow.zip", config.tor, config.path_exe);
 }
 
-//fs.createReadStream(config.path_exe +'/shadow.zip').pipe(unzip.Extract({ path: config.path_exe + '/Shadow' }));
+fs.createReadStream(config.path_exe +'/shadow.zip').pipe(unzip.Extract({ path: config.path_exe + '/Shadow' }));
 
 if(config.blockchain){
-	//downloadFileHTTPS("https://github.com/shadowproject/blockchain/releases/download/latest/blockchain.zip", "blockchain.zip", config.tor, config.path_block);
-	//fs.createReadStream(config.path_block +'/blockchain.zip').pipe(unzip.Extract({ path: config.path_block + '/ShadowCoin' }));
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/blockchain.zip", "blockchain.zip", config.tor, config.path_block);
+	fs.createReadStream(config.path_block +'/blockchain.zip').pipe(unzip.Extract({ path: config.path_block + '/ShadowCoin' }));
 }
 
 
