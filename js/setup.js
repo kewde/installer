@@ -2,9 +2,11 @@ var remote = require('remote');
 var shttps = require('socks5-https-client');
 const https = require('https');
 var unzip = require("unzip");
+var ws = require('windows-shortcuts');
 
 var request = require('request');
 var fs      = require('fs');
+var path		= require('path');
 
 var config = remote.getGlobal("configuration");
 console.log("Tor: " + remote.getGlobal("configuration").tor);
@@ -95,20 +97,22 @@ nodewin.elevate('"' + pathtest + '/Shadow/tor/Tor/tor.exe" --service install -op
 if(config.os == "linux" && config.arch == "x32"){
 
 } else if(config.os == "linux" && config.arch == "x64"){
-	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_linux64.zip", "shadow.zip", config.tor, config.path_exe);
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_linux64.zip", "shadow.zip", config.tor, config.path_exe, config.path_exe + '/Shadow');
 } else if(config.os == "win32" && config.arch == "x32"){
-	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_win32.zip", "shadow.zip", config.tor, config.path_exe);
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_win32.zip", "shadow.zip", config.tor, config.path_exe, config.path_exe + '/Shadow');
 } else if(config.os == "win32" && config.arch == "x64"){
-	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_win64.zip", "shadow.zip", config.tor, config.path_exe);
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_win64.zip", "shadow.zip", config.tor, config.path_exe, config.path_exe + '/Shadow');
 } else if(config.os == "osx"){
-	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_macosx.dmg.zip", "shadow.zip", config.tor, config.path_exe);
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/umbra_1.5.0.4_macosx.dmg.zip", "shadow.zip", config.tor, config.path_exe, config.path_exe + '/Shadow');
 }
 
-fs.createReadStream(config.path_exe +'/shadow.zip').pipe(unzip.Extract({ path: config.path_exe + '/Shadow' }));
+//fs.createReadStream(config.path_exe +'/shadow.zip').pipe(unzip.Extract({ path: config.path_exe + '/Shadow' }));
 
 if(config.blockchain){
-	downloadFileHTTPS("https://doc.shadowproject.io/bins/blockchain.zip", "blockchain.zip", config.tor, config.path_block);
-	fs.createReadStream(config.path_block +'/blockchain.zip').pipe(unzip.Extract({ path: config.path_block + '/ShadowCoin' }));
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/blockchain.zip", "blockchain.zip", config.tor, config.path_block, config.path_exe + '/ShadowCoin');
+	//fs.createReadStream(config.path_block +'/blockchain.zip').pipe(unzip.Extract({ path: config.path_block + '/ShadowCoin' }));
+} else {
+	fs.mkdir(config.path_exe + '/ShadowCoin');
 }
 
 
@@ -117,37 +121,73 @@ if(config.blockchain){
 
 
 
-function downloadFileHTTPS(url2, name, proxy, path, end_path){
-var file = fs.createWriteStream(path + "/" + name);
-var url = require('url');
-var options = url.parse(url2);
-options.followAllRedirects = true;
-options.followRedirect = true;
-options.maxRedirects = 10;
+function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
+	var file = fs.createWriteStream(path + "/" + name);
+	var url = require('url');
+	var options = url.parse(url2);
+	options.followAllRedirects = true;
+	options.followRedirect = true;
+	options.maxRedirects = 10;
 
+	if(proxy){
+		options.socksPort = 9050; // Tor default port
 
-if(proxy){
-options.socksPort = 9050; // Tor default port
-
-shttps.get(options, function(res) {
-    res.on('data', function(d) {
+		shttps.get(options, function(res) {
+	    res.on('data', function(d) {
 				console.log("called data");
-         file.write(d);
-    }).on('end', function(){
-          file.end();
-					fs.createReadStream(path +'/' + name).pipe(unzip.Extract({ path: end_path }));
-          });
-});
+        file.write(d);
+	    }).on('end', function(){
+        file.end();
+				fs.createReadStream(path +'/' + name).pipe(unzip.Extract({ path: unzip_path }));
+				fs.unlinkSync(path +'/' + name);
+      });
+		});
+	} else {
+		var len = 0;
+		var downloadingUmbra = true
+		https.get(options, function(res) {
+	    res.on('data', function(d) {
+	         file.write(d);
+					 len += d.length;
+				  var percent = Math.round((len / res.headers['content-length']) * 100);
+					if(percent <= 100) {
+						if(name == "shadow.zip") {
+							console.log("Downloading " + name + ": " + percent);
+							var parent = document.getElementById("umbra");
+							var progress = document.getElementById("umbra-percent");
+							parent.style.display = 'block';
+							progress.innerHTML = percent;
+						}
+						if(name == "blockchain.zip") {
+							console.log("Downloading " + name + ": " + percent);
+							var parent = document.getElementById("blockchain-download");
+							var progress = document.getElementById("blockchain-percent");
+							parent.style.display = 'block';
+							progress.innerHTML = percent;
+						}
+					}
+	    }).on('end', function(){
+	      file.end();
+				fs.createReadStream(path +'/' + name).pipe(unzip.Extract({ path: unzip_path }));
+				fs.unlinkSync(path +'/' + name);
 
-} else {
-	https.get(options, function(res) {
-    res.on('data', function(d) {
-         file.write(d);
-    }).on('end', function(){
-          file.end();
-					fs.createReadStream(path +'/' + name).pipe(unzip.Extract({ path: end_path }));
-          });
-});
+				if(config.os == "linux" && config.arch == "x32"){
 
-}
+				} else if(config.os == "linux" && config.arch == "x64"){
+
+				} else if(config.os == "win32" && config.arch == "x32"){
+
+				} else if(config.os == "win32" && config.arch == "x64"){
+					if(name == "shadow.zip")
+					ws.create(unzip_path + "/Launch Umbra.lnk", {
+				    target : unzip_path + "/umbra.exe",
+				    args : '-datadir="' + config.path_block + '\\ShadowCoin' + '"',
+				    desc : "Launch Umbra by The Shadow Project."
+					});
+				} else if(config.os == "osx"){
+
+				}
+      });
+		});
+	}
 }

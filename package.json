@@ -27,7 +27,8 @@
   "homepage": "https://shadowproject.io/",
   "dependencies": {
     "socks5-https-client": "1.2.0",
-    "unzip": "0.1.11"
+    "unzip": "0.1.11",
+    "windows-shortcuts": "0.1.4"
   },
   "devDependencies": {
     "electron-prebuilt": "^0.37.0"
