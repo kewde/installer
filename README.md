@@ -6,7 +6,7 @@ Note: use ```preview-frame.html``` for App preview/devel (simulates standalone w
 
 - Install Tor properly, the windows executable provides command line arguments to install it as a service but it seems to be very buggy. We might have to use the start up registry to make it work properly on boot.
 - Ideally the first page would allow you to select your operating system too, this would give us a bit more information to work upon and also allow us to extend the configuration to OS'es such as Tails, QubesOS and Subgraph (which often come with Tor support built in). There are a few tricks to detect Tails etc but those are not very reliable.
-- Download checksums of HTTPS and verify files against them
+- Download checksums (over HTTPS) and verify files against them
 - Verify _signed_ checksums against a GPG key
 - It would also be nice to have an updater, I envisioned the installer and the updater to be one and the same. Where it would just copy itself into the directory under the name "updater.exe" or something like that, asking the user if they want to update in the GUI is fine too.
 
