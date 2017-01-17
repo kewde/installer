@@ -197,9 +197,9 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 				}
 
 				if(config.os == "linux" && config.arch == "x32"){
-
+					createShortcutLinux();
 				} else if(config.os == "linux" && config.arch == "x64"){
-
+					createShortcutLinux();
 				} else if(config.os == "win32" && config.arch == "x32"){
 					if(name == "shadow.zip") {
 						ws.create(unzip_path + "/Launch Umbra.lnk", {
