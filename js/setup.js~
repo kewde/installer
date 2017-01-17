@@ -1,17 +1,15 @@
 var remote = require('remote');
-var config = remote.getGlobal("configuration");
 var shttps = require('socks5-https-client');
 const https = require('https');
 var unzip = require("unzip");
+var ws = require('windows-shortcuts');
+
 var request = require('request');
 var fs      = require('fs');
 var path		= require('path');
 var shell   = require('shell');
 
-if(config.os == "win32") {
-    var ws = require('windows-shortcuts');
-}
-
+var config = remote.getGlobal("configuration");
 console.log("Tor: " + remote.getGlobal("configuration").tor);
 var torport = 9050;
 
