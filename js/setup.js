@@ -112,10 +112,10 @@ if(config.os == "linux" && config.arch == "x32"){
 //fs.createReadStream(config.path_exe +'/shadow.zip').pipe(unzip.Extract({ path: config.path_exe + '/Shadow' }));
 
 if(config.blockchain){
-	downloadFileHTTPS("https://doc.shadowproject.io/bins/blockchain.zip", "blockchain.zip", config.tor, config.path_block, config.path_exe + '/ShadowCoin');
+	downloadFileHTTPS("https://doc.shadowproject.io/bins/blockchain.zip", "blockchain.zip", config.tor, config.path_block, config.path_block + '/ShadowCoin');
 	//fs.createReadStream(config.path_block +'/blockchain.zip').pipe(unzip.Extract({ path: config.path_block + '/ShadowCoin' }));
 } else {
-	fs.mkdir(config.path_exe + '/ShadowCoin');
+	fs.mkdir(config.path_block + '/ShadowCoin');
 }
 
 
