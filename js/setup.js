@@ -180,15 +180,17 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 
 				if(config.blockchain) {
 					if(document.getElementById("umbra-percent").innerHTML == "✓ Downloaded" && document.getElementById("blockchain-percent").innerHTML == "✓ Downloaded") {
-						document.getElementsByClassName('loading').innerHTML = "✓";
-						document.getElementById('finish-btn').removeAttribute('disabled')
+						document.getElementById('loading').innerHTML = "✓";
+						document.getElementById('finish-btn').removeAttribute('disabled');
 						document.getElementById('finish-btn').style.backgroundColor = "#E2213D";
+						document.getElementById('finish-btn').setAttribute('onClick', 'launchUmbra();');
 					}
 				} else {
 					if(document.getElementById("umbra-percent").innerHTML == "✓ Downloaded") {
 						document.getElementById('loading').innerHTML = "✓";
-						document.getElementById('finish-btn').removeAttribute('disabled')
+						document.getElementById('finish-btn').removeAttribute('disabled');
 						document.getElementById('finish-btn').style.backgroundColor = "#E2213D";
+						document.getElementById('finish-btn').setAttribute('onClick', 'launchUmbra();');
 					}
 				}
 
