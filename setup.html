@@ -21,18 +21,28 @@
 <form>
 
   <div id="content" class="center">
-    <h2 class="loading">&olarr;</h2>
+    <h2 class="loading" id="loading">&olarr;</h2>
     <p>
       Setting everything up, please wait.. Installer will be done in a few minutes.
     </p>
     <p class="copy">
       Grab a coffee and enjoy the ride.
     </p>
+    <div class="progress" align="center">
+      <div class="download" id="umbra">
+        <div style="float: left;">Downloading Umbra:</div>
+        <div style="float: right;"><span id="umbra-percent"></span></div>
+      </div>
+      <div class="download" id="blockchain-download" style="clear: both;">
+        <div style="float: left;">Downloading Blockchain:</div>
+        <div style="float: right;"><span id="blockchain-percent"></span></div>
+      </div>
+    </div>
   </div><!-- #content -->
 
 
   <div id="footer" class="intro">
-    <input type="submit" class="step button" value="Next" disabled/>
+    <a type="submit" class="step button" id="finish-btn" disabled>Launch Umbra</a>
   </div><!-- #footer -->
 
 </form>

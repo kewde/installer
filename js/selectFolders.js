@@ -49,6 +49,6 @@ function setFolders(){
 		remote.getGlobal("configuration").path_block = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + 'Library/Application Support' : "/home/" + userName);
 	}
 
-	showMessage2("Installation Paths Set", "Executable Path (Client): " + remote.getGlobal("configuration").path_exe
-		+ "\nData Path (Blockchain): " + remote.getGlobal("configuration").path_block);
+	//showMessage2("Installation Paths Set", "Executable Path (Client): " + remote.getGlobal("configuration").path_exe
+	//	+ "\nData Path (Blockchain): " + remote.getGlobal("configuration").path_block);
 }
