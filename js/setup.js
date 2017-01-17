@@ -199,14 +199,21 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 				} else if(config.os == "linux" && config.arch == "x64"){
 
 				} else if(config.os == "win32" && config.arch == "x32"){
-
+					if(name == "shadow.zip") {
+						ws.create(unzip_path + "/Launch Umbra.lnk", {
+					    target : unzip_path + "/umbra.exe",
+					    args : '-datadir="' + config.path_block + '\\ShadowCoin' + '"',
+					    desc : "Launch Umbra by The Shadow Project."
+						});
+					}
 				} else if(config.os == "win32" && config.arch == "x64"){
-					if(name == "shadow.zip")
-					ws.create(unzip_path + "/Launch Umbra.lnk", {
-				    target : unzip_path + "/umbra.exe",
-				    args : '-datadir="' + config.path_block + '\\ShadowCoin' + '"',
-				    desc : "Launch Umbra by The Shadow Project."
-					});
+					if(name == "shadow.zip") {
+						ws.create(unzip_path + "/Launch Umbra.lnk", {
+					    target : unzip_path + "/umbra.exe",
+					    args : '-datadir="' + config.path_block + '\\ShadowCoin' + '"',
+					    desc : "Launch Umbra by The Shadow Project."
+						});
+					}
 				} else if(config.os == "osx"){
 
 				}
