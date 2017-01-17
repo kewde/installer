@@ -742,10 +742,20 @@ form {
 .right {
   float: right; }
 
+.progress {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+}
+
 #umbra {
   display: none;
 }
 
 #blockchain-download {
   display: none;
+}
+
+#finish-btn {
+  background-color: #424242;
 }

@@ -7,6 +7,7 @@ var ws = require('windows-shortcuts');
 var request = require('request');
 var fs      = require('fs');
 var path		= require('path');
+var shell   = require('shell');
 
 var config = remote.getGlobal("configuration");
 console.log("Tor: " + remote.getGlobal("configuration").tor);
@@ -156,20 +157,40 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 							var parent = document.getElementById("umbra");
 							var progress = document.getElementById("umbra-percent");
 							parent.style.display = 'block';
-							progress.innerHTML = percent;
+							progress.innerHTML = percent + "% completed";
 						}
 						if(name == "blockchain.zip") {
 							console.log("Downloading " + name + ": " + percent);
 							var parent = document.getElementById("blockchain-download");
 							var progress = document.getElementById("blockchain-percent");
 							parent.style.display = 'block';
-							progress.innerHTML = percent;
+							progress.innerHTML = percent + "% completed";
 						}
+					}
+					if(percent == 100 && name == "shadow.zip") {
+						document.getElementById("umbra-percent").innerHTML = "✓ Downloaded"
+					}
+					if(percent == 100 && name == "blockchain.zip") {
+						document.getElementById("blockchain-percent").innerHTML = "✓ Downloaded"
 					}
 	    }).on('end', function(){
 	      file.end();
 				fs.createReadStream(path +'/' + name).pipe(unzip.Extract({ path: unzip_path }));
 				fs.unlinkSync(path +'/' + name);
+
+				if(config.blockchain) {
+					if(document.getElementById("umbra-percent").innerHTML == "✓ Downloaded" && document.getElementById("blockchain-percent").innerHTML == "✓ Downloaded") {
+						document.getElementsByClassName('loading').innerHTML = "✓";
+						document.getElementById('finish-btn').removeAttribute('disabled')
+						document.getElementById('finish-btn').style.backgroundColor = "#E2213D";
+					}
+				} else {
+					if(document.getElementById("umbra-percent").innerHTML == "✓ Downloaded") {
+						document.getElementById('loading').innerHTML = "✓";
+						document.getElementById('finish-btn').removeAttribute('disabled')
+						document.getElementById('finish-btn').style.backgroundColor = "#E2213D";
+					}
+				}
 
 				if(config.os == "linux" && config.arch == "x32"){
 
@@ -189,5 +210,21 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 				}
       });
 		});
+	}
+}
+
+function launchUmbra() {
+	if(config.os == "linux" && config.arch == "x32"){
+
+	} else if(config.os == "linux" && config.arch == "x64"){
+
+	} else if(config.os == "win32" && config.arch == "x32"){
+
+	} else if(config.os == "win32" && config.arch == "x64"){
+		shell.openItem(config.path_exe + "/Shadow/Launch Umbra.lnk");
+		var window = remote.getCurrentWindow();
+		window.close();
+	} else if(config.os == "osx"){
+
 	}
 }
