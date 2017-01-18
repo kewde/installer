@@ -202,14 +202,11 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 
 				} else if(config.os == "linux" && config.arch == "x64"){
 					var stream = fs.createWriteStream(config.path_exe + '/Launch_Umbra');
-					stream.on('open', function(fd) {
-						stream.write("#!/bin/sh\n");
-						stream.write(unzip_path + "/umbra -datadir='" + config.path_block + "/ShadowCoin'\n");
-					}).on('close', function(fd) {
-						stream.close();
-          });
-          fs.chmod(config.path_exe + '/Launch_Umbra', '0777');
-          exec('chmod +x ' + unzip_path + '/shadowcoind');
+					stream.write("#!/bin/sh\n");
+          stream.write("chmod 764 '" + config.path_exe + "/Shadow/umbra'\n");
+					stream.write(config.path_exe + "/Shadow/umbra -datadir='" + config.path_block + "/ShadowCoin'\n");
+          stream.end();
+          fs.chmod(config.path_exe + '/Launch_Umbra', '0764');
 				} else if(config.os == "win32" && config.arch == "x32"){
 					if(name == "shadow.zip") {
 						ws.create(unzip_path + "/Launch Umbra.lnk", {
@@ -236,9 +233,15 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 
 function launchUmbra() {
 	if(config.os == "linux" && config.arch == "x32"){
-
+    exec(config.path_exe + "/Launch_Umbra", function(output) {
+        console.log(output);
+    });
+		var window = remote.getCurrentWindow();
+		window.close();
 	} else if(config.os == "linux" && config.arch == "x64"){
-		shell.openItem(config.path_exe + "/Launch Umbra.desktop");
+    exec(config.path_exe + "/Launch_Umbra", function(output) {
+        console.log(output);
+    });
 		var window = remote.getCurrentWindow();
 		window.close();
 	} else if(config.os == "win32" && config.arch == "x32"){
