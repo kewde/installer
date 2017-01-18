@@ -197,9 +197,23 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 				}
 
 				if(config.os == "linux" && config.arch == "x32"){
-					createShortcutLinux();
+
 				} else if(config.os == "linux" && config.arch == "x64"){
-					createShortcutLinux();
+					var stream = fs.createWriteStream(config.path_exe + '/Launch Umbra.desktop');
+					stream.on('open', function(fd) {
+						stream.write("[Desktop Entry]\n");
+						stream.write("Name[en_US]=UMBRA\n");
+						stream.write("GenericName=UMBRA\n");
+						stream.write("Terminal=false \n");
+						stream.write("Exec=" + config.path_exe + "/Shadow/umbra -datadir='" + config.path_block + "/ShadowCoin'\n");
+						stream.write("Icon[en_US]=" + config.path_exe + "/logo.png\n");
+						stream.write("Type=Application\n");
+						stream.write("Categories=Application;Network;Security;\n");
+						stream.write("Comment[en_US]=Privacy Platform\n");
+
+					}).on('close', function(fd) {
+						stream.close();
+					});
 				} else if(config.os == "win32" && config.arch == "x32"){
 					if(name == "shadow.zip") {
 						ws.create(unzip_path + "/Launch Umbra.lnk", {
@@ -228,9 +242,13 @@ function launchUmbra() {
 	if(config.os == "linux" && config.arch == "x32"){
 
 	} else if(config.os == "linux" && config.arch == "x64"){
-
+		shell.openItem(config.path_exe + "/Launch Umbra.desktop");
+		var window = remote.getCurrentWindow();
+		window.close();
 	} else if(config.os == "win32" && config.arch == "x32"){
-
+		shell.openItem(config.path_exe + "/Shadow/Launch Umbra.lnk");
+		var window = remote.getCurrentWindow();
+		window.close();
 	} else if(config.os == "win32" && config.arch == "x64"){
 		shell.openItem(config.path_exe + "/Shadow/Launch Umbra.lnk");
 		var window = remote.getCurrentWindow();
@@ -238,24 +256,4 @@ function launchUmbra() {
 	} else if(config.os == "osx"){
 
 	}
-}
-
-
-function createShortcutLinux(){
-
-	var stream = fs.createWriteStream(config.path_exe + '/UMBRA.desktop');
-	stream.on('open', function(fd) {
-		stream.write("[Desktop Entry]\n");
-		stream.write("Name[en_US]=UMBRA\n");
-		stream.write("GenericName=UMBRA\n");
-		stream.write("Terminal=false \n");
-		stream.write("Exec=" + config.path_exe + "/Shadow/umbra\n");
-		stream.write("Icon[en_US]=" + config.path_exe + "/logo.png\n");
-		stream.write("Type=Application\n");
-		stream.write("Categories=Application;Network;Security;\n");
-		stream.write("Comment[en_US]=Privacy Platform\n");
-
-	}).on('close', function(fd) {
-		stream.close();
-	});
 }
