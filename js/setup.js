@@ -9,7 +9,9 @@ var path		= require('path');
 var shell   = require('shell');
 
 if(config.os == "win32") {
-    var ws = require('windows-shortcuts');
+  var ws = require('windows-shortcuts');
+} else if(config.os == "linux") {
+  var exec = require('child_process').exec;
 }
 
 console.log("Tor: " + remote.getGlobal("configuration").tor);
@@ -199,21 +201,15 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 				if(config.os == "linux" && config.arch == "x32"){
 
 				} else if(config.os == "linux" && config.arch == "x64"){
-					var stream = fs.createWriteStream(config.path_exe + '/Launch Umbra.desktop');
+					var stream = fs.createWriteStream(config.path_exe + '/Launch_Umbra');
 					stream.on('open', function(fd) {
-						stream.write("[Desktop Entry]\n");
-						stream.write("Name[en_US]=UMBRA\n");
-						stream.write("GenericName=UMBRA\n");
-						stream.write("Terminal=false \n");
-						stream.write("Exec=" + config.path_exe + "/Shadow/umbra -datadir='" + config.path_block + "/ShadowCoin'\n");
-						stream.write("Icon[en_US]=" + config.path_exe + "/logo.png\n");
-						stream.write("Type=Application\n");
-						stream.write("Categories=Application;Network;Security;\n");
-						stream.write("Comment[en_US]=Privacy Platform\n");
-
+						stream.write("#!/bin/sh\n");
+						stream.write(unzip_path + "/umbra -datadir='" + config.path_block + "/ShadowCoin'\n");
 					}).on('close', function(fd) {
 						stream.close();
-					});
+          });
+          fs.chmod(config.path_exe + '/Launch_Umbra', '0777');
+          exec('chmod +x ' + unzip_path + '/shadowcoind');
 				} else if(config.os == "win32" && config.arch == "x32"){
 					if(name == "shadow.zip") {
 						ws.create(unzip_path + "/Launch Umbra.lnk", {
