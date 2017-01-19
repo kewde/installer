@@ -149,7 +149,7 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 		});
 	} else {
 		var len = 0;
-		var downloadingUmbra = true
+		var downloadingUmbra = true;
 		https.get(options, function(res) {
 	    res.on('data', function(d) {
 	         file.write(d);
@@ -179,11 +179,20 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
 					}
 	    }).on('end', function(){
 	      file.end();
-				fs.createReadStream(path +'/' + name).pipe(unzip.Extract({ path: unzip_path }));
-				fs.unlinkSync(path +'/' + name);
+        var blockchainExtracted = 0;
+        var zipName = name;
+				fs.createReadStream(path +'/' + name)
+          .pipe(unzip.Extract({ path: unzip_path }))
+            .on('close', function() {
+              if(zipName == "blockchain.zip") {
+                blockchainExtracted = 1;
+                fs.unlinkSync(path +'/' + zipName);
+              }
+              fs.unlinkSync(path +'/' + zipName);
+            });
 
 				if(config.blockchain) {
-					if(document.getElementById("umbra-percent").innerHTML == "✓ Downloaded" && document.getElementById("blockchain-percent").innerHTML == "✓ Downloaded") {
+					if(blockchainExtracted = 1 && document.getElementById("umbra-percent").innerHTML == "✓ Downloaded" && document.getElementById("blockchain-percent").innerHTML == "✓ Downloaded") {
 						document.getElementById('loading').innerHTML = "✓";
 						document.getElementById('finish-btn').removeAttribute('disabled');
 						document.getElementById('finish-btn').style.backgroundColor = "#E2213D";
@@ -208,21 +217,21 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
           stream.end();
           fs.chmod(config.path_exe + '/Launch_Umbra', '0764');
 				} else if(config.os == "win32" && config.arch == "x32"){
-					if(name == "shadow.zip") {
+					//if(name == "shadow.zip") {
 						ws.create(unzip_path + "/Launch Umbra.lnk", {
 					    target : unzip_path + "/umbra.exe",
 					    args : '-datadir="' + config.path_block + '\\ShadowCoin' + '"',
 					    desc : "Launch Umbra by The Shadow Project."
 						});
-					}
+					//}
 				} else if(config.os == "win32" && config.arch == "x64"){
-					if(name == "shadow.zip") {
+					//if(name == "shadow.zip") {
 						ws.create(unzip_path + "/Launch Umbra.lnk", {
 					    target : unzip_path + "/umbra.exe",
 					    args : '-datadir="' + config.path_block + '\\ShadowCoin' + '"',
 					    desc : "Launch Umbra by The Shadow Project."
 						});
-					}
+					//}
 				} else if(config.os == "osx"){
 
 				}
