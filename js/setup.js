@@ -187,8 +187,9 @@ function downloadFileHTTPS(url2, name, proxy, path, unzip_path) {
               if(zipName == "blockchain.zip") {
                 blockchainExtracted = 1;
                 fs.unlinkSync(path +'/' + zipName);
+              } else {
+                fs.unlinkSync(path +'/' + zipName);
               }
-              fs.unlinkSync(path +'/' + zipName);
             });
 
 				if(config.blockchain) {
