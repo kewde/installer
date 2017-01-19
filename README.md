@@ -4,6 +4,7 @@ Note: use ```preview-frame.html``` for App preview/devel (simulates standalone w
 
 ## Pre-reqs for development
 
+* `npm install`
 * `npm install electron-packager -g`
 * `npm install electron-packager --save-dev`
 
