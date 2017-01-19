@@ -1,11 +1,9 @@
 {
   "name": "umbra-installer",
+  "productName": "Install Umbra from Shadowproject",
   "version": "1.0.0",
   "description": "Installs the Umbra client from Shadowproject",
   "main": "main.js",
-  "scripts": {
-    "start": "electron ./main.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kewde/installer.git"
@@ -27,12 +25,22 @@
   "homepage": "https://shadowproject.io/",
   "dependencies": {
     "socks5-https-client": "1.2.0",
-    "unzip": "0.1.11"
+    "unzip": "0.1.11",
+    "ipc": "0.0.1",
+    "dialog": "0.2.0"
   },
   "optionalDependencies": {
     "windows-shortcuts": "0.1.4"
   },
   "devDependencies": {
+    "electron": "^1.4.14",
     "electron-prebuilt": "^0.37.0"
+  },
+  "scripts": {
+    "start": "electron ./main.js",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./assets/icons/shadow.icns --prune=true --out=release-builds",
+    "package-win32": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=./assets/icons/shadow.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",
+    "package-win64": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=./assets/icons/shadow.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\"",
+    "package-linux" : "electron-packager . --overwrite --platform=linux --arch=x64 --icon=./assets/icons/shadow.png --prune=true --out=release-builds"
   }
 }
