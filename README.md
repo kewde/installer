@@ -2,6 +2,12 @@
 
 Note: use ```preview-frame.html``` for App preview/devel (simulates standalone window for devel purposes).
 
+## Pre-reqs for development
+
+* `npm install`
+* `npm install electron-packager -g`
+* `npm install electron-packager --save-dev`
+
 ## TODO
 
 - Install Tor properly, the windows executable provides command line arguments to install it as a service but it seems to be very buggy. We might have to use the start up registry to make it work properly on boot.

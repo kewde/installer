@@ -3,7 +3,7 @@
 const electron = require('electron');
 const os = require('os');
 
-
+var path = require('path');
 var ipc = require('ipc');
 var dialog = require('dialog');
 
@@ -34,7 +34,7 @@ function createWindow () {
 	mainWindow.setMenu(null);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
 	setDefaultPaths();
 
