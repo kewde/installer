@@ -24,10 +24,10 @@
   },
   "homepage": "https://shadowproject.io/",
   "dependencies": {
-    "socks5-https-client": "1.2.0",
-    "unzip": "0.1.11",
+    "dialog": "0.2.0",
     "ipc": "0.0.1",
-    "dialog": "0.2.0"
+    "socks5-https-client": "1.2.0",
+    "unzip": "0.1.11"
   },
   "optionalDependencies": {
     "windows-shortcuts": "0.1.4"
