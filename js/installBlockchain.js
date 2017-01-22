@@ -1,4 +1,4 @@
-var remote = require('remote');
+const remote = require('electron').remote;
 
 dialog = remote.require('dialog');
 

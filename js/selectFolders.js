@@ -4,7 +4,7 @@ check OS -> set normal paths if none set
 form.onsubmit
 download
 */
-var remote = require('remote');
+const remote = require('electron').remote;
 var dialog = remote.require('dialog');
 
 
