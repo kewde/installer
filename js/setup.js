@@ -1,4 +1,4 @@
-var remote = require('remote');
+const remote = require('electron').remote;
 var config = remote.getGlobal("configuration");
 var shttps = require('socks5-https-client');
 const https = require('https');
@@ -6,7 +6,7 @@ var unzip = require("unzip");
 var request = require('request');
 var fs      = require('fs');
 var path		= require('path');
-var shell   = require('shell');
+const shell = require('electron').shell;
 
 if(config.os == "win32") {
   var ws = require('windows-shortcuts');
